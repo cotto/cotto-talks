@@ -38,55 +38,63 @@ presentation_date: April 30, 2011
 
 * Implementation Features
 **  register VM - most are stack-based
-**  control flow is based on CPS - continuations that capure the *essential* state of the vm
+**  control flow is based on CPS - continuations that capure the essential state of the vm
 **  trade a stack for a linked list
 **  how to make continuations cheap?
 ***  no stack to capture
 ***  only capture the context, which is GC'd
 
 ----
- * Who should care?
-    anyone one who wants to experiment with language implementations
-    write a new GC, have it collect Rakudo's garbage
-    write a new toy language for a compilers class
-    output LOLCODE from bf
-    RTEMS: Parrots in SPACE - gsoc from last year, make Parrot run on research satellites
-      Researchers would much rather write in an HLL (even a slow one) than pay the developer cost of programming on bare metal
+== Introduction
+* Who should care?
+** anyone who wants to...
+*** experiment with language implementations
+*** write a new GC, have it collect Rakudo's garbage
+*** write a new toy language for a compilers class
+*** output LOLCODE from bf
+*** run on a satellite
++**** RTEMS: Parrots in SPACE - gsoc project to make Parrot run on research satellites
+**** Researchers want to write in an HLL, convenience beats cost of bare metal hacking
 
 ----
- * Who hacks on Parrot?  Where do they come from? (world map with points)
+== Introduction
+** Who hacks on Parrot?  Where do they come from? (world map with points)
     quick idea, don't get tedious
     cover their backgrounds, etc
 
 ----
- * Where did Parrot come from?
-    originally was an April Fool's day annoucement
-    may still be; we're not quite sure
-    originally intended to support Perl 6, now Rakudo
-    wanted a distinct VM rather than an evolved solution
-    NO XS, because have you seen it?
-    previous emphasis on supporting everything, current emphasis a more minimalist approach
+== Introduction
+* Where did Parrot come from?
+** originally was an April Fool's day annoucement
+** may still be; we're not quite sure
+** originally intended to support Perl 6, now Rakudo
+** wanted a distinct VM rather than an evolved solution
+** NO XS, because have you seen it?
+** previous emphasis on supporting everything
+** current emphasis a more minimalist approach
 
 ----
- * Parrot's goals
-    started as a VM for dynamic languages when the it was still a weird idea
-    portability (inspired by perl)
-    HLL interoperability - this is a defining requirement
-    it takes an extraordinary amount of effort just to get a modern HLL that people will take seriously
-    Parrot wants to make state-of-the-art language implementations accessible to anyone
- * emphasis is now a common oss runtime + compiler tools for dynamic languages
-    our tools are built around Rakudo-y assumptions because Rakudo hackers built them
-    Larry says, "There is more than one way to do it."
-    We want people to use Parrot, even if they don't care for nqp and grammars
+== Introduction
+* Parrot's goals
+** started as a VM for dynamic languages in 2001, when it was still a weird idea
+** portability (inspired by perl)
+** HLL interoperability - this is a defining requirement
+** it takes an extraordinary amount of effort just to get a modern HLL that people will take seriously
+** Parrot wants to make state-of-the-art language implementations accessible to anyone
+* Our emphasis is now a common oss runtime and set of compiler tools for building dynamic languages
+** our tools are built around Rakudo-y assumptions because Rakudo hackers built them
+** Larry says, "There is more than one way to do it."
+** We want people to use Parrot, even if they don't care for nqp and grammars
 
 ----
+== Introduction
  * short overview of parrot's history
     I'm the nth architect/pumpking
     allison was so awesome, Canonical ate her
     go into what it means that I'm architect, what teams mean, etc.
  * GSoC/GCI (past projects, involvement, benefits)
     hit or miss here
-    original GC project "failed", but Andrew was so scarred by it he's been cleaning up internals ever since
+    original GSoC GC project "failed", but Andrew was so scarred by it he's been cleaning up internals ever since
     
 ----
  * languages were kicked out of the nest
@@ -110,7 +118,7 @@ presentation_date: April 30, 2011
     We don't know what features will be in 9.0, but we know what day it'll happen on.
 
 ----
-== What is Parrot's current state?
+== How's Parrot doing?
  * Rakudo is all growed up
     still work together as needed
     some overlap in developers, mostly orthogonal
@@ -119,11 +127,17 @@ presentation_date: April 30, 2011
     profilers and optimizers wanted!
     
 ----
+== How's Parrot doing?
  * current work on deprecation/support policy
     have deprecations in a machine-readable format
     have basic tools to scan code looking for (and yelling about) deprecated functions
     
+----
+== How's Parrot doing?
  * encapsulated GC (whiteknight++), encapsulated imcc, better pcc, better strings, better bytecode
+    
+----
+== How's Parrot doing?
  * self-hosted ops compiler (explain what this is)
     Parrot is built with ops
     ops files are compiled into core_ops.c and dynops files by ops2c
@@ -131,37 +145,60 @@ presentation_date: April 30, 2011
     nqp is built on Parrot
     core_ops.c is checked into git to break the cycle
     separate targets to rebuild Parrot and rebootstrap ops
+    
+----
+== How's Parrot doing?
  * bacek working on ops -> llvm compiler (difficulties)
     C is nice for some things
     for semantic parsing, not so much
     problematic constructs: macros, unions, structs
     showing some good results for simple programs
     ops reform is needed for further work
+    
+----
+== How's Parrot doing?
  * growing ecosystem
     lots of projects (name some recent ones)
     with an ecosystem comes testing to find out what Parrot changes break which project
     dukeleto is on this, but probably too busy to get much done
+    
+----
+== How's Parrot doing?
  * big challenges - HLL testing, pcc speed, inner runloop, PIR/C boundary (VERIFY w/ valgrind)
  * Perl 5 in Perl 6
 
-future:
+----
+== What's in Parrot's future?
  * M0
     aggressively minimal VM, new foundation for Parrot
     about as powerful as C, but we can easily analyze it
     most of parrot will be implemented in m0 ops
     simple to jit
     removes the need for the C/PIR boundary
+
+----
+== What's in Parrot's future?
  * Lorito
     combination of M0 and a meta-object model
     sufficient to implement PMCs
+
+----
+== What's in Parrot's future?
  * 6model
     worked on by jnthn
     objects that create classes that create objects
+
+----
+== What's in Parrot's future?
  * self-hosted interoperable langauges
     for existing languages, nqp might not be attractive
     they won't get ast->bytecode for free, but...
     they will get a stable interface for creating bytecode
     and a flexible meta-object model
+
+
+----
+== What's in Parrot's future?
  * cover roadmap goals and progress
     
 
