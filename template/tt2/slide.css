@@ -90,4 +90,25 @@ small {
     background-image: url([% images_directory %]/[% logo_image %]);
     background-repeat: no-repeat;
 }
+
+
+/* Pm's adjustments (stolen) */
+
+#content { 
+font-size:30px; 
+    margin-top:60px;
+}
+
+h1, h2 { margin-top:0px; margin-bottom:1em; font-size:36px; }
+
+
+ul, ol { margin-top:0.5em; margin-bottom:0.5em; }
+ul ul { margin-top:0; margin-bottom:0; }
+
+ol li { list-style:decimal; }
+ul li { list-style:none; }
+
+pre { margin-left:60px; font-size:24px; }
+tt { font-size:24px; font-weight:normal; }
+
 /* END index.css */

@@ -6,7 +6,7 @@ use utf8;
 
 Template::Document->new({
     METADATA => {
-        'modtime' => '1300247077',
+        'modtime' => '1302989437',
         'name' => 'slide.css',
     },
     BLOCK => sub {
@@ -28,7 +28,7 @@ Template::Document->new({
     $output .=  "/";
 #line 90 "template/tt2/slide.css"
     $output .=  $stash->get('logo_image');
-    $output .=  ");\n    background-repeat: no-repeat;\n}\n/* END index.css */\n";
+    $output .=  ");\n    background-repeat: no-repeat;\n}\n\n\n/* Pm's adjustments (stolen) */\n\n#content { \nfont-size:30px; \n    margin-top:60px;\n}\n\nh1, h2 { margin-top:0px; margin-bottom:1em; font-size:36px; }\n\n\nul, ol { margin-top:0.5em; margin-bottom:0.5em; }\nul ul { margin-top:0; margin-bottom:0; }\n\nol li { list-style:decimal; }\nul li { list-style:none; }\n\npre { margin-left:60px; font-size:24px; }\ntt { font-size:24px; font-weight:normal; }\n\n/* END index.css */\n";
         } };
         if ($@) {
             $_tt_error = $context->catch($@, \$output);

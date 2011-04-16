@@ -14,7 +14,7 @@ author_email: christoph@mksig.org
 author_webpage: http://reparrot.blogspot.org/
 copyright_string: Copyright &copy; 2011 Christoph Otto
 
-banner_bgcolor: lightblue
+banner_bgcolor: lightgreen
 show_controls: 1
 mouse_controls: 0
 image_width: 350
@@ -22,7 +22,7 @@ auto_scrolldown: 1
 logo_image: logo.png
 file_base: /usr/src/presentations/yapcna2011-parrotstate
 
-slides_file: Spork.slides
+slides_file: ParrotState2011LinuxFestNW.slides
 template_directory: template/tt2
 template_path: 
 - ./template/tt2
