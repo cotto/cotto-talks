@@ -76,9 +76,12 @@ presentation_date: April 30, 2011
 ----
 == Introduction
 * Parrot's goals
-** started as a VM for dynamic languages in 2001, when it was still a weird idea
+** started as a VM for dynamic languages back when it was still a weird idea
 ** portability (inspired by perl)
 ** HLL interoperability - this is a defining requirement
+
+----
+== Introduction
 ** it takes an extraordinary amount of effort just to get a modern HLL that people will take seriously
 ** Parrot wants to make state-of-the-art language implementations accessible to anyone
 * Our emphasis is now a common oss runtime and set of compiler tools for building dynamic languages
@@ -97,10 +100,12 @@ presentation_date: April 30, 2011
     original GSoC GC project "failed", but Andrew was so scarred by it he's been cleaning up internals ever since
     
 ----
+== Introduction
  * languages were kicked out of the nest
     keeping them in vcs isn't a long-term strategy, especially if Parrot isn't Rakudo-only
 
 ----
+== Introduction
  * deprecation and support policy, why we have them, what they do (upgrade tax)
     explain "supported" vs "developer" releases
     Parrot's velocity requires a strict deprecation policy so that projects don't bitrot before they're done
@@ -108,6 +113,7 @@ presentation_date: April 30, 2011
     With it in place (and enforced), you know exactly what to do when moving from one supported version to the next
 
 ----
+== Introduction
  * regular releases
     You should do them.
     they saved Parrot from death and made releases a routine and predictable process (insert joke)
