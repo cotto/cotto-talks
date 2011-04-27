@@ -10,7 +10,7 @@ presentation_date: April 30, 2011
 *** experiment with language implementations
 *** write a new GC, have it collect Rakudo's garbage
 *** write a new toy language for a compilers class
-*** output LOLCODE from bf
+*** output LOLCODE from Ruby
 *** run on a satellite
 +**** RTEMS: Parrots in SPACE - gsoc project to make Parrot run on research satellites
 **** Researchers want to write in an HLL, convenience beats cost of bare metal hacking
@@ -21,7 +21,7 @@ presentation_date: April 30, 2011
 {image: http://mksig.org/img/oneparrot.jpg}
 ** originally was an April Fool's day annoucement
 ** originally intended to support Perl 6, now Rakudo
-** wanted a distinct VM rather than an evolved solution
+** distinct VM rather than an evolved solution
 ** NO XS.  If you don't know why, you're probably happier.
 
 ----
@@ -40,7 +40,7 @@ presentation_date: April 30, 2011
 +**  virtual machine, tools and runtime for dynamic language implementations
 **  primary product is libparrot.so (or libparrot.dll, libparrot.dylib, etc)
 **  includes nqp (subset of Perl 6) for from-scratch languages (or if you like Perl 6 syntax)
-**  runs Rakudo, Partcl, Lua
+**  fairly complete implementations exist of Rakudo, Partcl and Lua
 **  active projects exist for JS, Ruby, Python
 {image: http://mksig.org/img/something.png}
 
@@ -48,8 +48,8 @@ presentation_date: April 30, 2011
 == Introduction
 * Parrot's goals
 ** started as a VM for dynamic languages back when it was still a weird idea
-** portability (inspired by perl)
 ** HLL interoperability - this is a defining requirement
+** portability
 
 ----
 == Introduction
@@ -58,14 +58,14 @@ presentation_date: April 30, 2011
 *** writing a web app is hard 
 +**** *if* you don't have a good framework
 *** production-ready modern HLLs take 10 years
-*** we want to make state-of-the-art language implementations accessible to anyone
+*** state-of-the-art language implementations should be accessible to anyone
 *** Parrot is all about providing a framework for building compilers
-*** you give us the abstract syntax tree, we'll take care of the boilerplate...
 
 ----
 == Introduction
 * Parrot features
-** bytecode format and handling (verification, saving, loading, execution)
+** you give us the abstract syntax tree, we'll take care...
++** bytecode format and handling (verification, saving, loading, execution)
 ** PMCs (classes) for basic data structures
 ** calling conventions
 ** garbage collection
@@ -83,7 +83,7 @@ presentation_date: April 30, 2011
 *** dynamic object model
 *** designed first for dynamic languages
 *** Parrot Compiler Toolkit (used by Rakudo)
-*** You can get a commit bit for Parrot.
+*** You can get a commit bit for Parrot or fork and send a pull request.
 
 ----
 == Introduction
@@ -99,7 +99,7 @@ presentation_date: April 30, 2011
 
 ----
 == How's Parrot doing?
-* languages are distnict projects
+* languages are distinct projects
 ** Rakudo is all grown up now and living on its own
 ** there's some overlap in developers between Parrot and Rakudo, but it's largely orthogonal
 ** we still work together as needed
@@ -107,7 +107,7 @@ presentation_date: April 30, 2011
     
 ----
 == How's Parrot doing?
-* supporting users
+* Supporting Users
 ** fine-tuning our deprecation/support policy
 ** deprecations in a machine-readable format
 ** basic tools to scan code and warning about deprecated functions
@@ -128,7 +128,7 @@ presentation_date: April 30, 2011
 
 ----
 == How's Parrot doing?
-* self-hosted infrastructure
+* Self-hosted Infrastructure
 ** PIR uses ops
 ** ops files are defined in ops-flavored C compiled into real C by ops2c
 ** ops2c is built in nqp
@@ -153,14 +153,18 @@ presentation_date: April 30, 2011
     
 ----
 == How's Parrot doing?
-* growing ecosystem
-** lots of projects (name some recent ones)
+* Growing Ecosystem
+** lots of projects
+*** parrot-linear-algebra
+*** winxed
+*** Rosella
+*** others?
 ** with an ecosystem comes testing to find out what Parrot changes break which project
 ** dukeleto is on this, but probably too busy to get much done
 
 ----
 == How's Parrot doing?
-* continuing challenges
+* Continuing Challenges
 ** regular automated HLL testing
 ** pcc speed/efficiency
 ** inner runloop problem
@@ -182,7 +186,7 @@ presentation_date: April 30, 2011
 
 ----
 == What's in Parrot's future?
-* more self-hosted tools
+* More Self-hosted Tools
 ** PIRATE - self-hosted PIR compiler, written in nqp
 *** uses tree-optimization for code optimization
 *** really shiny
@@ -225,11 +229,13 @@ presentation_date: April 30, 2011
 
 ----
 == Who's in Parrot's future?
- * You are!
+* You are!
+** Drop by #parrot on irc.parrot.org
+** file a ticket a trac.parrot.org
+** follow blogs at planet.parrotcode.org (including GSoC progress)
     
 ----
 == That's it!
  * questions?
  * comments?
  * pie?
-
