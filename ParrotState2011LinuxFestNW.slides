@@ -4,47 +4,6 @@ presentation_title: Parrot: State of the VM
 presentation_place: Bellingham, WA
 presentation_date: April 30, 2011
 ----
-== Introduction 
-* What is Parrot?
-+**  virtual machine, tools and runtime for dynamic language implementations
-**  includes nqp (subset of Perl 6) for from-scratch languages (or if you like Perl 6 syntax)
-**  runs Rakudo, Partcl, Lua
-**  active projects exist for JS, Ruby, Python
-
-----
-== Introduction
-* It's a misconception that writing a compiler has to be is hard
-** writing a web app is hard 
-+*** *if* you don't have a good framework
-+* Parrot is all about providing a framework for building compilers
-** you give us the abstract syntax tree
-** We take care of the boilerplate
-*** bytecode format and handling (verification, saving, loading, execution)
-*** calling conventions
-*** garbage collection
-*** ops
-*** MORE THINGIES HERE
-
-----
-== Introduction
-* What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
-+**  built-in mmd (optional and named params, etc)
-**  dynamic object model
-**  fewer static assumptions (NOTE: if you can't name them, they don't exist)
-**  XXX: more?
-
-----
-== Introduction
-
-* Implementation Features
-**  register VM - most are stack-based
-**  control flow is based on CPS - continuations that capure the essential state of the vm
-**  trade a stack for a linked list
-**  how to make continuations cheap?
-***  no stack to capture
-***  only capture the context, which is GC'd
-
-----
 == Introduction
 * Who should care?
 ** anyone who wants to...
@@ -55,12 +14,6 @@ presentation_date: April 30, 2011
 *** run on a satellite
 +**** RTEMS: Parrots in SPACE - gsoc project to make Parrot run on research satellites
 **** Researchers want to write in an HLL, convenience beats cost of bare metal hacking
-
-----
-== Introduction
-** Who hacks on Parrot?  Where do they come from? (world map with points)
-    quick idea, don't get tedious
-    cover their backgrounds, etc
 
 ----
 == Introduction
@@ -81,6 +34,60 @@ presentation_date: April 30, 2011
 ** HLL interoperability - this is a defining requirement
 
 ----
+== Introduction 
+* What is Parrot?
++**  virtual machine, tools and runtime for dynamic language implementations
+**  primary product is libparrot.so (or libparrot.dll, libparrot.dylib, etc)
+**  includes nqp (subset of Perl 6) for from-scratch languages (or if you like Perl 6 syntax)
+**  runs Rakudo, Partcl, Lua
+**  active projects exist for JS, Ruby, Python
+{image: http://mksig.org/img/something.png}
+
+----
+== Introduction
+* It's a misconception that writing a compiler has to be is hard
+** writing a web app is hard 
++*** *if* you don't have a good framework
++* Parrot is all about providing a framework for building compilers
+** you give us the abstract syntax tree, we'll take care of the boilerplate
++*** bytecode format and handling (verification, saving, loading, execution)
+*** PMCs (classes) for basic data structures
+*** calling conventions
+*** garbage collection
+*** ops
+*** I/O
+*** NCI (native call interface, similar to ffi)
+*** embedding API
+*** extending API
+
+----
+== Introduction
+* What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
++** built-in multi-method dispatch 
+** calling conventions (ptional and named params, etc)
+** dynamic object model
+** designed first for dynamic languages
+** Parrot Compiler Toolkit (used by Rakudo)
+
+----
+== Introduction
+
+* Implementation Features
+**  register VM - most are stack-based
+**  control flow is based on CPS - continuations that capure the essential state of the vm
+**  trade a stack for a linked list
+**  how to make continuations cheap?
+***  no stack to capture
+***  only capture the context, which is GC'd
+
+----
+== Introduction
+** Who hacks on Parrot?  Where do they come from? (world map with points)
+    quick idea, don't get tedious
+    cover their backgrounds, etc
+
+----
+CUT THIS OUT
 == Introduction
 ** it takes an extraordinary amount of effort just to get a modern HLL that people will take seriously
 ** Parrot wants to make state-of-the-art language implementations accessible to anyone
@@ -89,30 +96,8 @@ presentation_date: April 30, 2011
 ** Larry says, "There is more than one way to do it."
 ** We want people to use Parrot, even if they don't care for nqp and grammars
 
-----
-== Introduction
- * short overview of parrot's history
-    I'm the nth architect/pumpking
-    allison was so awesome, Canonical ate her
-    go into what it means that I'm architect, what teams mean, etc.
- * GSoC/GCI (past projects, involvement, benefits)
-    hit or miss here
-    original GSoC GC project "failed", but Andrew was so scarred by it he's been cleaning up internals ever since
-    
-----
-== Introduction
- * languages were kicked out of the nest
-    keeping them in vcs isn't a long-term strategy, especially if Parrot isn't Rakudo-only
-
-----
-== Introduction
- * deprecation and support policy, why we have them, what they do (upgrade tax)
-    explain "supported" vs "developer" releases
-    Parrot's velocity requires a strict deprecation policy so that projects don't bitrot before they're done
-    we started too early, but we're sticking with it
-    With it in place (and enforced), you know exactly what to do when moving from one supported version to the next
-
-----
+---
+CUT THIS OUT-
 == Introduction
  * regular releases
     You should do them.
@@ -140,17 +125,22 @@ presentation_date: April 30, 2011
     
 ----
 == How's Parrot doing?
- * encapsulated GC (whiteknight++), encapsulated imcc, better pcc, better strings, better bytecode
+ * encapsulated GC (whiteknight++)
+ * encapsulated imcc
+ * pcc refactor
+ * better strings
+ * better bytecode
     
 ----
 == How's Parrot doing?
- * self-hosted ops compiler (explain what this is)
+ * self-hosted ops compiler
     Parrot is built with ops
     ops files are compiled into core_ops.c and dynops files by ops2c
     ops2c is build in nqp
     nqp is built on Parrot
     core_ops.c is checked into git to break the cycle
     separate targets to rebuild Parrot and rebootstrap ops
+    been doing this since may '10
     
 ----
 == How's Parrot doing?
@@ -172,6 +162,17 @@ presentation_date: April 30, 2011
 == How's Parrot doing?
  * big challenges - HLL testing, pcc speed, inner runloop, PIR/C boundary (VERIFY w/ valgrind)
  * Perl 5 in Perl 6
+
+----
+== What's in Parrot's future?
+ * Google Summer of Code
+** JavaScript on Parrot - Rohit Jangid (Will Coleda)
+** GObject Interop - Christoph Gaertner (Andrew Whitworth)
+** GMP Integer Bindings - Robert Kuo (Jonathan Leto)
+** LALR(1) Parser Generator - Tyler Curtis (Daniel Arbelo)
+** Python3 on Parrot - Lucian Branescu Mihaila (Allison Randal)
+** New Debugger - Kevin Polulak (Christoph Otto)
+** newPOST Migration - Brian Gernhardt (Vasily Chekalkin)
 
 ----
 == What's in Parrot's future?
@@ -207,4 +208,9 @@ presentation_date: April 30, 2011
 == What's in Parrot's future?
  * cover roadmap goals and progress
     
+----
+== That's it!
+ * questions?
+ * comments?
+ * robots?
 
