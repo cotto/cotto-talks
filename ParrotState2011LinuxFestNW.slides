@@ -18,6 +18,7 @@ presentation_date: April 30, 2011
 ----
 == Introduction
 * Where did Parrot come from?
+{image: http://mksig.org/img/oneparrot.jpg}
 ** originally was an April Fool's day annoucement
 ** originally intended to support Perl 6, now Rakudo
 ** wanted a distinct VM rather than an evolved solution
@@ -52,46 +53,55 @@ presentation_date: April 30, 2011
 
 ----
 == Introduction
-* It's a misconception that writing a compiler has to be is hard
-** writing a web app is hard 
-+*** *if* you don't have a good framework
-** it takes 10 years to get a production-ready modern HLL from scratch
-** we want to make state-of-the-art language implementations accessible to anyone
-+* Parrot is all about providing a framework for building compilers
-** you give us the abstract syntax tree, we'll take care of the boilerplate
-+*** bytecode format and handling (verification, saving, loading, execution)
-*** PMCs (classes) for basic data structures
-*** calling conventions
-*** garbage collection
-*** ops
-*** I/O
-*** NCI (native call interface, similar to ffi)
-*** new embedding API
+* Parrot's motivation
+** It's a misconception that writing a compiler has to be is hard
+*** writing a web app is hard 
++**** *if* you don't have a good framework
+*** production-ready modern HLLs take 10 years
+*** we want to make state-of-the-art language implementations accessible to anyone
+*** Parrot is all about providing a framework for building compilers
+*** you give us the abstract syntax tree, we'll take care of the boilerplate...
 
 ----
 == Introduction
-* What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
-+** built-in multi-method dispatch 
-** calling conventions (ptional and named params, etc)
-** dynamic object model
-** designed first for dynamic languages
-** Parrot Compiler Toolkit (used by Rakudo)
+* Parrot features
+** bytecode format and handling (verification, saving, loading, execution)
+** PMCs (classes) for basic data structures
+** calling conventions
+** garbage collection
+** ops
+** I/O
+** NCI (native call interface, i.e. calling C libraries from an HLL)
+** embedding API
+
+----
+== Introduction
+* Parrot and other VMs
+** What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
++*** built-in multi-method dispatch 
+*** calling conventions (optional, named, positional, slurpy params, etc)
+*** dynamic object model
+*** designed first for dynamic languages
+*** Parrot Compiler Toolkit (used by Rakudo)
+*** You can get a commit bit for Parrot.
 
 ----
 == Introduction
 * Implementation Features
 ** register VM - most are stack-based
-** control flow is based on CPS - continuations that capure the essential state of the vm
-** trade a stack for a linked list
-** how to make continuations cheap?
+** control flow is based on CPS 
+*** continuations capure the essential state of the vm
+** we trade a stack for a linked list
+** continuations are cheap
 *** no stack to capture
 *** only capture the context, which is a GCable object
+*** keep a pointer, it stays around.  Drop it, it's gone.
 
 ----
 == How's Parrot doing?
-* treating languages as distnict projects
-** Rakudo is all growed up now and living on its own
-** there's some overlap in developers, but it's mostly orthogonal
+* languages are distnict projects
+** Rakudo is all grown up now and living on its own
+** there's some overlap in developers between Parrot and Rakudo, but it's largely orthogonal
 ** we still work together as needed
 ** Rakudo is a primary driver of our HLL testing infrastructure
     
@@ -100,12 +110,12 @@ presentation_date: April 30, 2011
 * supporting users
 ** fine-tuning our deprecation/support policy
 ** deprecations in a machine-readable format
-** basic tools to scan code looking for (and warning about) deprecated functions
+** basic tools to scan code and warning about deprecated functions
     
 ----
 == How's Parrot doing?
-* Improvements in past 18 months (+/-)
-** moved to Git and GitHub
+* Recent Improvements and Changes
+** moved to Git and GitHub from svn and trac (though still using trac)
 ** big test coverage increase from Google Code-In (thanks, students!)
 ** tests for makefile dependencies: reliable parallel build
 ** encapsulated GC (whiteknight++, GSoC '08 alumn)
@@ -119,27 +129,27 @@ presentation_date: April 30, 2011
 ----
 == How's Parrot doing?
 * self-hosted infrastructure
-** Parrot is built with ops
-** ops files are compiled into core_ops.c and dynops files by ops2c
-** ops2c is build in nqp
+** PIR uses ops
+** ops files are defined in ops-flavored C compiled into real C by ops2c
+** ops2c is built in nqp
 ** nqp is built on Parrot
 ** core_ops.c is checked into git to break the cycle
 ** separate targets to rebuild Parrot and rebootstrap ops
-** been doing this since may '10
-** PMC interfaces for opcode and bytecode manipulation
-** imcc is no longer a special citizen
-** tree-optimization - GSoC project to optimize trees based on patterns
-*** available to anyone producing a tree-like structure from PMCs
+** been doing this since May '10
+* PMC interfaces for opcode and bytecode manipulation
+* imcc is no longer a special citizen
+* tree-optimization - GSoC project to optimize trees based on patterns
+** available to anyone producing a tree-like structure from PMCs
     
 ----
 == How's Parrot doing?
 * LLVM jitting of ops
 ** bacek was working on an ops -> llvm compiler
 ** C is nice for some things
-** for semantic parsing, not so much
-** problematic constructs: macros, unions, structs
+** If you want to semantically parse C, not so much
+** problematic constructs: macros, unions, structs, type comprehension
 ** showing some good results for simple programs
-** ops reform is needed for further work
+** ops reform needed for further work
     
 ----
 == How's Parrot doing?
@@ -155,14 +165,13 @@ presentation_date: April 30, 2011
 ** pcc speed/efficiency
 ** inner runloop problem
 ** PIR/C boundary
-** Perl 5 in Perl 6
 
 ----
 == What's in Parrot's future?
 * Google Summer of Code
 ** fourth year participating in Google Summer of Code
 ** first year as our own organization
-** 8 accepted projects
+** 8 accepted projects!
 *** JavaScript on Parrot - Rohit Jangid (Will Coleda)
 *** GObject Interop - Christoph Gaertner (Andrew Whitworth)
 *** GMP Integer Bindings - Robert Kuo (Jonathan Leto)
@@ -215,12 +224,12 @@ presentation_date: April 30, 2011
 ** Winxed does this now, JavaScript and Python3 GSoC projects will do this too
 
 ----
-== What's in Parrot's future?
- * cover roadmap goals and progress
+== Who's in Parrot's future?
+ * You are!
     
 ----
 == That's it!
  * questions?
  * comments?
- * robots?
+ * pie?
 
