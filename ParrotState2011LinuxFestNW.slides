@@ -5,66 +5,69 @@ presentation_place: Bellingham, WA
 presentation_date: April 30, 2011
 ----
 == Introduction
-* Who should care?
+* Who is Parrot for?
 ** anyone who wants to...
-*** experiment with language implementations
-*** write a new GC, have it collect Rakudo's garbage
-*** write a new toy language for a compilers class
-*** output LOLCODE from Ruby
-*** run on a satellite
-+**** RTEMS: Parrots in SPACE - gsoc project to make Parrot run on research satellites
-**** Researchers want to write in an HLL, convenience beats cost of bare metal hacking
+*** implement a compiler for a new language
+*** write a new GC and see how it performs with several different langauges
+*** learn about compiler design
+*** translate code from one langauge to another
+*** add a new feature to an existing Parrot-hosted langauge
+*** join an accessible and friendly community of OSS hackers
 
 ----
 == Introduction
 * Where did Parrot come from?
-{image: http://mksig.org/img/oneparrot.jpg}
-** originally was an April Fool's day annoucement
 ** originally intended to support Perl 6, now Rakudo
 ** distinct VM rather than an evolved solution
-** NO XS.  If you don't know why, you're probably happier.
 
 ----
 == Introduction
 ** Who hacks on Parrot?  Where do they come from?
-*** Australia
+*** US: Washington, Oregon, Texas, New York, Wisconsin, Alabama, Pennsylvania
 *** Europe: Germany, Spain, France, UK, Austria
+*** Australia
 *** Brazil
 *** China
 *** India
-*** US: Washington, Oregon, Texas, New York, Wisconsin, Alabama, Pennsylvania
+
+----
+== Introduction
+* What kind of a virtual machine is Parrot?
+** not hardware virtualization like VMWare, EC2, etc
+** VMWare emulates a real computer
+** Java VM, .Net and Parrot emulate an imaginary computer
+** the imaginary computer is more convenient to deal with
 
 ----
 == Introduction 
 * What is Parrot?
-+**  virtual machine, tools and runtime for dynamic language implementations
-**  primary product is libparrot.so (or libparrot.dll, libparrot.dylib, etc)
-**  includes nqp (subset of Perl 6) for from-scratch languages (or if you like Perl 6 syntax)
-**  fairly complete implementations exist of Rakudo, Partcl and Lua
-**  active projects exist for JS, Ruby, Python
-{image: http://mksig.org/img/something.png}
++** virtual machine, tools and runtime for dynamic language implementations
+** primary product is libparrot.so (or libparrot.dll, libparrot.dylib, etc)
+** includes nqp (subset of Perl 6) for from-scratch languages (or if you like Perl 6 syntax)
+** complete implementations exist of Rakudo, Partcl and Lua
+** active projects exist for JavaScript, Ruby and Python
 
 ----
 == Introduction
-* Parrot's goals
+* Parrot's Goals
 ** started as a VM for dynamic languages back when it was still a weird idea
 ** HLL interoperability - this is a defining requirement
 ** portability
 
 ----
 == Introduction
-* Parrot's motivation
+* Parrot's Motivation
 ** It's a misconception that writing a compiler has to be is hard
 *** writing a web app is hard 
 +**** *if* you don't have a good framework
-*** production-ready modern HLLs take 10 years
+*** it takes years of effort to produce an HLL with the features developers have come to expect
 *** state-of-the-art language implementations should be accessible to anyone
 *** Parrot is all about providing a framework for building compilers
 
 ----
 == Introduction
-* Parrot features
-** you give us the abstract syntax tree, we'll take care...
+* Parrot Features
+** you give us the abstract syntax tree, we'll take care of...
 +** bytecode format and handling (verification, saving, loading, execution)
 ** PMCs (classes) for basic data structures
 ** calling conventions
@@ -76,10 +79,11 @@ presentation_date: April 30, 2011
 
 ----
 == Introduction
-* Parrot and other VMs
+* Parrot and Other VMs
 ** What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
-+*** built-in multi-method dispatch 
-*** calling conventions (optional, named, positional, slurpy params, etc)
++*** built-in multi-method dispatch
+**** the right sub is called based on the types of all arguments
+*** flexible calling conventions (optional, named, positional, slurpy, etc)
 *** dynamic object model
 *** designed first for dynamic languages
 *** Parrot Compiler Toolkit (used by Rakudo)
@@ -89,21 +93,22 @@ presentation_date: April 30, 2011
 == Introduction
 * Implementation Features
 ** register VM - most are stack-based
-** control flow is based on CPS 
+** control flow is based on continuation-passing style
 *** continuations capure the essential state of the vm
-** we trade a stack for a linked list
-** continuations are cheap
+** we trade an execution stack for a linked list
+** continuations are optimized to be cheap
 *** no stack to capture
 *** only capture the context, which is a GCable object
 *** keep a pointer, it stays around.  Drop it, it's gone.
 
 ----
 == How's Parrot doing?
-* languages are distinct projects
-** Rakudo is all grown up now and living on its own
+* Languages as Distinct Projects
+** Rakudo is living on its own
 ** there's some overlap in developers between Parrot and Rakudo, but it's largely orthogonal
 ** we still work together as needed
 ** Rakudo is a primary driver of our HLL testing infrastructure
+** separation means regular automated testing so we know when a language breaks
     
 ----
 == How's Parrot doing?
@@ -115,12 +120,11 @@ presentation_date: April 30, 2011
 ----
 == How's Parrot doing?
 * Recent Improvements and Changes
-** moved to Git and GitHub from svn and trac (though still using trac)
+** moved to Git and GitHub from svn
 ** big test coverage increase from Google Code-In (thanks, students!)
 ** tests for makefile dependencies: reliable parallel build
 ** encapsulated GC (whiteknight++, GSoC '08 alumn)
 ** encapsulated imcc
-** pcc refactor
 ** immutable strings
 ** better bytecode
 ** still too slow
@@ -183,6 +187,7 @@ presentation_date: April 30, 2011
 *** Python3 on Parrot - Lucian Branescu Mihaila (Allison Randal)
 *** New Debugger - Kevin Polulak (Christoph Otto)
 *** newPOST Migration - Brian Gernhardt (Vasily Chekalkin)
+** follow them on their parrot.org blogs
 
 ----
 == What's in Parrot's future?
