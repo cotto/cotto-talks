@@ -3,15 +3,16 @@ presentation_topic: Parrot
 presentation_title: Parrot: State of the VM
 presentation_place: Bellingham, WA
 presentation_date: April 30, 2011
+presentation_notes: slides at mksig.org/slides/lfnw2011
 ----
 == Introduction
 * Who is Parrot for?
 ** anyone who wants to...
 *** implement a compiler for a new language
-*** write a new GC and see how it performs with several different langauges
+*** write a new GC and see how it performs with several different languages
 *** learn about compiler design
-*** translate code from one langauge to another
-*** add a new feature to an existing Parrot-hosted langauge
+*** translate code from one language to another
+*** add a new feature to an existing Parrot-hosted language
 *** join an accessible and friendly community of OSS hackers
 
 ----
@@ -37,7 +38,7 @@ presentation_date: April 30, 2011
 ** not hardware virtualization like VMWare, EC2, etc
 ** VMWare emulates a real computer
 ** Java VM, .Net and Parrot emulate a computer that doesn't exist in hardware
-** Parrot presents a virtual (imaginary) machine that's simpler and more convenient to work with than a real CPU would be
+** Parrot presents a virtual (imaginary) machine that's simpler and more convenient than a real CPU
 ** better living through abstraction!
 
 ----
@@ -45,16 +46,16 @@ presentation_date: April 30, 2011
 * What is Parrot?
 +** virtual machine, tools and runtime
 ** designed for dynamic and interoperable language implementations
-** primary product is libparrot.so (or libparrot.dll, libparrot.dylib, etc)
-** includes nqp (subset of Perl 6) for building languages
+** primary product is the libparrot library
+** nqp (subset of Perl 6) for building languages is included
 ** complete implementations exist of Rakudo, Partcl and Lua
-** active projects exist for JavaScript, Ruby and Python3
+** GSoC projects exist for JavaScript and Python3
 
 ----
 == Introduction
 * Parrot's Goals
 ** started as a VM for dynamic languages back when it was still a weird idea
-** HLL interoperability - this is a defining requirement
+** HLL interoperability as a defining requirement
 ** portability
 
 ----
@@ -62,7 +63,7 @@ presentation_date: April 30, 2011
 * Parrot's Motivation
 ** It's a misconception that writing a compiler has to be is hard
 *** writing a web app is hard 
-+**** *if* you don't have a good framework
+**** *if* you don't have a good framework
 *** it takes years of effort to produce an HLL with the features developers have come to expect
 *** state-of-the-art language implementations should be accessible to anyone
 *** Parrot is all about providing a framework for building compilers
@@ -75,10 +76,10 @@ presentation_date: April 30, 2011
 ** PMCs (classes) for basic data structures
 ** calling conventions
 ** garbage collection
-** ops
+** runloops
 ** I/O
 ** NCI (native call interface, i.e. calling C libraries from an HLL)
-** embedding API
+** C embedding API
 
 ----
 == Introduction
@@ -86,7 +87,6 @@ presentation_date: April 30, 2011
 ** What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
 +*** built-in multi-method dispatch
 **** the right sub is called based on the types of all arguments
-*** flexible calling conventions (optional, named, positional, slurpy, etc)
 *** dynamic object model
 *** designed first for dynamic languages
 *** Parrot Compiler Toolkit (used by Rakudo)
@@ -95,14 +95,12 @@ presentation_date: April 30, 2011
 ----
 == Introduction
 * Implementation Features
-** register VM - most are stack-based
+** register-based
 ** control flow is based on continuation-passing style
-*** continuations capure the essential state of the vm
-** we trade an execution stack for a linked list
-** continuations are optimized to be cheap
-*** no stack to capture
-*** only capture the context, which is a GCable object
-*** keep a pointer, it stays around.  Drop it, it's gone.
+*** continuations capture and restore the essential state of the vm
+*** we trade an execution stack for a linked list
+** portability - Linux, msvc, cygwin, darwin, solaris, dragonfly
+** flexible calling conventions (optional, named, positional, slurpy, etc)
 
 ----
 == How's Parrot doing?
@@ -117,18 +115,18 @@ presentation_date: April 30, 2011
 == How's Parrot doing?
 * Supporting Users
 ** fine-tuning our deprecation/support policy
-** deprecations in a machine-readable format
-** creating a tool to scan code and warning about deprecated functions
+** deprecations in a machine-readable format - api.yaml
+** tool to scan code and warning about deprecated functions
     
 ----
 == How's Parrot doing?
 * Recent Improvements and Changes
 ** moved to Git and GitHub from svn
-*** new workflow docs, tests, Trac integration, acceptance
+*** new workflow docs, tests, Trac integration, developer buy-in
 ** big test coverage increase from Google Code-In (thanks, students!)
 ** tests for makefile dependencies: reliable parallel build
-** encapsulated GC (whiteknight++, GSoC '08 alumn)
-** encapsulated imcc
+** new generational mark and sweep garbage collector
+** imcc encapsulation
 ** immutable strings
 ** more efficient bytecode storage
 ** still too slow
@@ -137,12 +135,12 @@ presentation_date: April 30, 2011
 ----
 == How's Parrot doing?
 * Self-hosted Infrastructure
-** ops compiler is written in nqp
-** ops files are defined in Parrot-flavored C, compiled into real C by ops2c
-** nqp is built in PIR and nqp
+** self-hosted ops compiler -  written in nqp
+** ops files are defined in Parrot-flavored C
+** ops2c compiles them into core_ops.c
 ** core_ops.c is checked into git to break the cycle
-** separate targets to rebuild Parrot and rebootstrap ops
-** been doing this since May '10
+** need separate targets to build Parrot and rebootstrap ops
+** we've been doing this since May '10
 * PMC interfaces for ops and bytecode manipulation
 * imcc is no longer a special citizen
 * tree-optimization - optimize trees with patterns and transforms
@@ -152,9 +150,9 @@ presentation_date: April 30, 2011
 == How's Parrot doing?
 * LLVM jitting of ops
 ** bacek was working on an ops -> llvm compiler
-** C is nice for some things
+** C is nice for some things and seems like a small language at first
 ** If you want to semantically parse C, not so much
-** problematic constructs: macros, unions, structs, type comprehension
+** problematic constructs: macros, structs, types
 ** showing some good results for simple programs
 ** ops reform needed for further work
 
@@ -163,8 +161,8 @@ presentation_date: April 30, 2011
 * Growing Ecosystem
 ** parrot-linear-algebra - linear algebra library
 ** winxed - JS-like syntax, maps cleanly to PIR
-** Rosella - libray of libraries 
-** distutils - instal and build tools
+** Rosella - library of libraries 
+** distutils - install and build tools
 ** blizkost - Perl 5 embedded in Parrot
 ** PIRATE - self-hosted PIR compiler
 ** others
@@ -211,7 +209,7 @@ presentation_date: April 30, 2011
 ** aggressively minimal VM, new foundation for Parrot
 ** about as powerful as C, but we can easily analyze it
 ** removes the need for the C/PIR boundary
-** readily supports multiple implementaitons
+** readily supports multiple implementations
 ** simple to jit, currently 36 ops
 
 ----
@@ -250,9 +248,8 @@ presentation_date: April 30, 2011
 ** PCT is built around Rakudo-y assumptions, since Rakudo hackers built them
 ** Larry Wall says "There is more than one way to do it."
 ** We want people to use Parrot, even if they don't care for nqp and grammars
-+* solution: self-hosted interoperable langauges
++** self-hosted interoperable languages:
 ** we'll provide a stable interface for creating bytecode and a flexible meta-object model
-** no free ast->bytecode
 ** they can use their preferred language
 ** Winxed does this now, JavaScript and Python3 GSoC projects will do this too
 
