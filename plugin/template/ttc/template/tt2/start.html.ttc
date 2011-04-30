@@ -6,7 +6,7 @@ use utf8;
 
 Template::Document->new({
     METADATA => {
-        'modtime' => '1300247077',
+        'modtime' => '1304127165',
         'name' => 'start.html',
     },
     BLOCK => sub {
@@ -34,8 +34,11 @@ Template::Document->new({
     $output .=  "</h4>\n<h4>";
 #line 12 "template/tt2/start.html"
     $output .=  $stash->get('presentation_date');
+    $output .=  "</h4>\n<h4>";
+#line 13 "template/tt2/start.html"
+    $output .=  $stash->get('presentation_notes');
     $output .=  "</h4>\n</center>\n</div>\n";
-#line 15 "template/tt2/start.html"
+#line 16 "template/tt2/start.html"
     $output .=  $context->include('bottom.html');
     $output .=  "\n<!-- END start -->\n";
         } };
