@@ -1,0 +1,274 @@
+----
+presentation_topic: Parrot
+presentation_title: Parrot: State of the VM
+presentation_place: Bellingham, WA
+presentation_date: April 30, 2011
+presentation_notes: slides at mksig.org/slides/lfnw2011
+----
+== Introduction
+* Who is Parrot for?
+** anyone who wants to...
+*** implement a compiler for a new language
+*** write a new GC and see how it performs with several different languages
+*** learn about compiler design
+*** translate code from one language to another
+*** add a new feature to an existing Parrot-hosted language
+*** join a knowledgable and friendly community of OSS hackers
+
+----
+== Introduction
+* Where did Parrot come from?
+** originally intended to support Perl 6, now Rakudo
+** distinct VM rather than an evolved solution
+** since then, we've set our sights on being a VM for all dynamic languages
+
+----
+== Introduction
+** Who hacks on Parrot?  Where do they come from?
+*** US: Washington, Oregon, Texas, New York, Wisconsin, Alabama, Pennsylvania
+*** Europe: Germany, Spain, France, UK, Austria
+*** Australia
+*** Brazil
+*** China
+*** India
+
+----
+== Introduction
+* What kind of a virtual machine is Parrot?
+** "virtual machine" means "implements a computer in software"
+** not hardware virtualization like VMWare, EC2, etc
+** VMWare emulates a real computer
+** Java VM, .Net and Parrot emulate a computer that doesn't exist in hardware
+** Parrot gives you a virtual (imaginary) machine that's more convenient than a real CPU
+** same reason why we use Java, Ruby, PHP, Perl, etc instead of C or assembly
+** better living through abstraction!
+
+----
+== Introduction 
+* What is Parrot?
+** virtual machine, tools and runtime for dynamic language implementations
+** designed for interoperable dynamic language implementations
+** central product is the libparrot library
+*** this contains the critical C components, interp, strings, I/O, etc
+** includes imcc, our PIR compiler
+** includes nqp (subset of Perl 6) for building languages
+** complete implementations exist of Rakudo, Partcl and Lua
+** GSoC projects exist for JavaScript and Python3
+** many other languages at various stages exist
+
+----
+== Introduction
+* Parrot's Goals
+** started as a VM for dynamic languages back when it was still a weird idea
+** HLL interoperability
+** portability
+
+----
+== Introduction
+* Parrot's Motivation
+** It's a misconception that writing a compiler has to be is hard
+** writing a web app is hard 
+*** *if* you don't have a good framework
+** it takes years of effort to produce an HLL with the features developers have come to expect
+** state-of-the-art language implementations should be accessible to anyone
+** Parrot is all about providing a framework for building compilers
+
+----
+== Introduction
+* Parrot Features
+** you give us the abstract syntax tree, we'll take care of:
+** bytecode format and handling (verification, saving, loading, execution)
+** PMCs (classes) for basic data structures
+** calling conventions
+** garbage collection
+** runloops
+** I/O
+** NCI (native call interface, i.e. calling C libraries from an HLL)
+** C embedding API
+
+----
+== Introduction
+* Parrot and Other VMs
+** What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
+*** built-in multi-method dispatch
+**** the right sub is called based on the types of all arguments
+*** dynamic object model
+*** designed first for dynamic languages
+*** Parrot Compiler Toolkit (used by Rakudo)
+*** You can get a commit bit for Parrot or fork and send a pull request.
+
+----
+== Introduction
+* Implementation Features
+** register-based
+** control flow is based on continuation-passing style
+*** continuations capture and restore the essential state of the vm
+*** we trade an execution stack for a linked list
+** portability - Linux, msvc, cygwin, darwin, solaris, dragonfly
+** flexible calling conventions (optional, named, positional, slurpy, etc)
+    
+----
+== How's Parrot doing?
+* Recent Improvements and Changes
+** moved to Git and GitHub from svn
+*** new workflow docs, tests, Trac integration, developer buy-in
+** big test coverage increase from Google Code-In (thanks, students!)
+** tests for makefile dependencies: reliable parallel build
+** new generational mark and sweep garbage collector
+** imcc encapsulation
+** immutable strings
+** more efficient bytecode storage
+** still too slow
++*** profilers and optimizers wanted!
+
+----
+== How's Parrot doing?
+* Languages as Distinct Projects
+** Rakudo is living on its own
+** there's some overlap in developers between Parrot and Rakudo, but it's largely orthogonal
+** we still work together as needed
+** Rakudo is a primary driver of our HLL testing infrastructure
+** separation means regular automated testing so we know when a language breaks
+    
+----
+== How's Parrot doing?
+* Supporting Users
+** fine-tuning our deprecation/support policy
+*** we need to make progress, but we can't break things just because
+** deprecations in a machine-readable format - api.yaml
+** tool to scan code and warning about deprecated functions
+
+----
+== How's Parrot doing?
+* Self-hosted Infrastructure
+** self-hosted ops compiler -  written in nqp
+** ops files are defined in Parrot-flavored C
+** ops2c compiles them into core_ops.c
+** core_ops.c is checked into git to break the cycle
+** need separate targets to build Parrot and rebootstrap ops
+** we've been doing this since May '10
+* PMC interfaces for ops and bytecode manipulation
+* imcc is no longer a special citizen
+* tree-optimization - optimize trees with patterns and transforms
+** available to anyone producing a tree-like structure from PMCs
+    
+----
+== How's Parrot doing?
+* LLVM jitting of ops
+** bacek was working on an ops -> llvm compiler
+** C is nice for some things and seems like a small language at first
+** If you want to semantically parse C, not so much
+** some problematic constructs: macros, structs, types
+** showing some good results for simple programs
+** ops reform needed for further work
+
+----
+== How's Parrot doing?
+* Growing Ecosystem
+** parrot-linear-algebra - linear algebra library
+** winxed - JS-like syntax, maps cleanly to PIR
+** Rosella - library of libraries 
+** distutils - install and build tools
+** blizkost - Perl 5 embedded in Parrot
+** PIRATE - self-hosted PIR compiler
+** others
+* with an ecosystem comes testing to find out what Parrot changes break which project
+* dukeleto is on it with Jitterbug
+
+----
+== How's Parrot doing?
+* Continuing Challenges
+** *more* regular automated HLL/library testing
+** pcc speed/efficiency
+** lexical variable implementation
+** inner runloop problem
+** PIR/C boundary
+*** sound interesting?
+*** drop by #parrot and we'll put you to work
+
+----
+== What's in Parrot's future?
+* Google Summer of Code
+** fourth year participating in Google Summer of Code
+** first year as our own organization
+** 7 accepted projects!
+*** GObject Interop - Christoph Gaertner (Andrew Whitworth)
+*** GMP Integer Bindings - Robert Kuo (Jonathan Leto)
+*** JavaScript on Parrot - Rohit Jangid (Will Coleda)
+*** Python3 on Parrot - Lucian Branescu Mihaila (Allison Randal)
+*** LALR(1) Parser Generator - Tyler Curtis (Daniel Arbelo)
+*** New Debugger - Kevin Polulak (Christoph Otto)
+*** newPOST Migration - Brian Gernhardt (Vasily Chekalkin)
+** follow them on their parrot.org blogs
+
+----
+== What's in Parrot's future?
+* More Self-hosted Tools
+** PIRATE - self-hosted PIR compiler, written in nqp
+*** uses tree-optimization for code optimization
+*** really shiny
+*** also, slow
+
+----
+== What's in Parrot's future?
+* M0
+** aggressively minimal VM, new foundation for Parrot
+** about as powerful as C, but we can easily analyze it
+** removes the need for the C/PIR boundary
+** readily supports multiple implementations
+** simple to jit, currently 36 ops
+
+----
+== What's in Parrot's future?
+* Lorito
+** combination of M0 and a meta-object model
+** will replace the majority of Parrot's C components
+** sufficient to implement PMCs, pcc, strings, etc
+* meta-object model is called 6model
+** programmatic interface for class manipulation
+** objects that create classes that create objects
+** implemented by jnthn in nqp
+
+----
+== What's in Parrot's future?
+* Example of 6model code (from 6guts.wordpress.com)
+ #class definition
+ class Band {
+     has $!name;
+     has $!genre;
+     method describe() {
+         say "$!name play $!genre music";
+     }
+ }
+ 
+ #code to generate class definition programmatically
+ ::Band := ClassHOW.new_type();
+ Band.^add_attribute(Attribute.new(name => '$!name'));
+ Band.^add_attribute(Attribute.new(name => '$!genre'));
+ Band.^add_method('describe', method () { ... });
+ Band.^compose();
+
+----
+== What's in Parrot's future?
+* TIMTOWTDI!
+** PCT is built around Rakudo-y assumptions, since Rakudo hackers built them
+** Larry Wall says "There is more than one way to do it."
+** We want people to use Parrot, even if they don't care for nqp and grammars
++** self-hosted interoperable languages:
+** we'll provide a stable interface for creating bytecode and a flexible meta-object model
+** they can use their preferred language
+** Winxed does this now, JavaScript and Python3 GSoC projects will do this too
+
+----
+== Who's in Parrot's future?
+* You are!
+** -Ofun!
+** drop by #parrot on irc.parrot.org
+** fork us on github.com/parrot/parrot
+** file a bug at trac.parrot.org
+** follow discussions at parrot-dev@parrot.org
+** follow blogs at planet.parrotcode.org (including GSoC progress)
+    
+----
+== That's it!
+ * questions?
