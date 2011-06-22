@@ -1,84 +1,90 @@
 ----
-presentation_topic: Parrot
 presentation_title: Parrot: State of the VM
-presentation_place: Bellingham, WA
-presentation_date: April 30, 2011
-presentation_notes: slides at mksig.org/slides/lfnw2011
+presentation_notes: slides at mksig.org/slides/osb11
 ----
-== Introduction
-* Who is Parrot for?
-** anyone who wants to...
-*** implement a compiler for a new language
-*** write a new GC and see how it performs with several different languages
-*** learn about compiler design
-*** translate code from one language to another
-*** add a new feature to an existing Parrot-hosted language
-*** join a knowledgable and friendly community of OSS hackers
+* Who here has used PHP?
+{image: http://farm3.static.flickr.com/2342/2516515847_5a2566f26f_m_d.jpg}
++* Who's used another language? (Perl, Python, Ruby, Scala, Haskell)
+{image: http://farm4.static.flickr.com/3177/3070754858_861f1200f1_z_d.jpg}
++* What if they could work together?
+* {image: http://farm4.static.flickr.com/3430/4556206100_a922d9e5af_d.jpg}
 
 ----
-== Introduction
-* Where did Parrot come from?
-** originally intended to support Perl 6, now Rakudo
-** distinct VM rather than an evolved solution
-** since then, we've set our sights on being a VM for all dynamic languages
+* That's the dream.
+* a bit different from how Parrot started
 
 ----
-== Introduction
-** Who hacks on Parrot?  Where do they come from?
-*** US: Washington, Oregon, Texas, New York, Wisconsin, Alabama, Pennsylvania
-*** Europe: Germany, Spain, France, UK, Austria
-*** Australia
-*** Brazil
-*** China
-*** India
+== Where did Parrot come from?
+* Rakudo Perl 6
+* distinct VM
+* now we want to take over the world
 
 ----
-== Introduction
-* What kind of a virtual machine is Parrot?
+== What kind of a virtual machine is Parrot?
 ** "virtual machine" means "implements a computer in software"
 ** not hardware virtualization like VMWare, EC2, etc
-** VMWare emulates a real computer
-** Java VM, .Net and Parrot emulate a computer that doesn't exist in hardware
-** Parrot gives you a virtual (imaginary) machine that's more convenient than a real CPU
-** same reason why we use Java, Ruby, PHP, Perl, etc instead of C or assembly
+** emulate a computer that doesn't exist in hardware
 ** better living through abstraction!
 
 ----
-== Introduction 
-* What is Parrot?
+== What is Parrot?
 ** virtual machine, tools and runtime for dynamic language implementations
-** designed for interoperable dynamic language implementations
-** central product is the libparrot library
-*** this contains the critical C components, interp, strings, I/O, etc
-** includes imcc, our PIR compiler
-** includes nqp (subset of Perl 6) for building languages
+** interoperable dynamic languages 
+** libparrot
+** PIR compiler
+** nqp (not quite Perl 6) for building languages
 ** complete implementations exist of Rakudo, Partcl and Lua
-** GSoC projects exist for JavaScript and Python3
-** many other languages at various stages exist
+** JavaScript and Python3 (GSoC)
+** many other languages at various stages
 
 ----
-== Introduction
-* Parrot's Goals
-** started as a VM for dynamic languages back when it was still a weird idea
-** HLL interoperability
-** portability
+== Parrot's Goals
+* HLL interoperability
+* portability
+* but first, the characters
+----
+== imcc
+* fast, sometimes
+* works, mostly
+* originally a prototype that escaped
+{image: http://farm3.static.flickr.com/2031/2252206486_efce1517d9_d.jpg}
+----
+== PASM
+* Parrot assembly language
+* the assembly langauge that isn't
+* usually very low-level
+{image: http://mksig.org/img/kakapo.jpg}
+----
+== PIR
+* Parrot Intermediate Representation
+* kinder, gentler assembly-ish language
+* still a bit strange
+* heredocs?
+{image: http://mksig.org/img/kakapo-disguised.jpg}
+----
+== Garbage Collector
+* good performance
+* all the best of the 1980s
+{image: http://mksig.org/img/80s.png}
+----
+== PMC/Object system
+* PMC - PolyMorphic Container (or Parrot Magic Cookie)
+* usable, has its quirks
+* can't support slightly unusual languages like JavaScript
+{image: http://mksig.org/img/cookie.jpg}
+----
+== C/PIR boundary
+* PIR calls C that calls PIR ...
+* expensive to cross
+* typically about 3 nested loops deep
+* major bottleneck
+{image: http://mksig.org/img/canadian_border.jpg}
 
 ----
-== Introduction
-* Parrot's Motivation
-** It's a misconception that writing a compiler has to be is hard
-** writing a web app is hard 
-*** *if* you don't have a good framework
-** it takes years of effort to produce an HLL with the features developers have come to expect
-** state-of-the-art language implementations should be accessible to anyone
-** Parrot is all about providing a framework for building compilers
-
-----
-== Introduction
-* Parrot Features
+== Parrot Features
 ** you give us the abstract syntax tree, we'll take care of:
-** bytecode format and handling (verification, saving, loading, execution)
-** PMCs (classes) for basic data structures
+** bytecode format and handling
+** basic data structures
 ** calling conventions
 ** garbage collection
 ** runloops
@@ -87,39 +93,41 @@ presentation_notes: slides at mksig.org/slides/lfnw2011
 ** C embedding API
 
 ----
-== Introduction
-* Parrot and Other VMs
-** What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
-*** built-in multi-method dispatch
-**** the right sub is called based on the types of all arguments
-*** dynamic object model
-*** designed first for dynamic languages
-*** Parrot Compiler Toolkit (used by Rakudo)
-*** You can get a commit bit for Parrot or fork and send a pull request.
+== Who is Parrot for?
+* anyone who wants to...
+** make interoperable languages a reality
+** write a new language
+** write a new GC
+** learn about compiler design
+** join a knowledgable and friendly bunch of OSS hackers
 
 ----
-== Introduction
-* Implementation Features
-** register-based
-** control flow is based on continuation-passing style
-*** continuations capture and restore the essential state of the vm
-*** we trade an execution stack for a linked list
-** portability - Linux, msvc, cygwin, darwin, solaris, dragonfly
-** flexible calling conventions (optional, named, positional, slurpy, etc)
+++ Parrot and Other VMs
+* What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
+** built-in multi-method dispatch
+** dynamic object model
+** designed first for dynamic languages
+** Parrot Compiler Toolkit (used by Rakudo)
+
+----
+== Implementation Features
+* register-based
+* continuation-passing style control flow
+** we trade an execution stack for a linked list
+* portability - Linux, msvc, cygwin, darwin, solaris, dragonfly
+* flexible calling conventions (optional, named, positional, slurpy, etc)
     
 ----
 == How's Parrot doing?
-* Recent Improvements and Changes
-** moved to Git and GitHub from svn
-*** new workflow docs, tests, Trac integration, developer buy-in
-** big test coverage increase from Google Code-In (thanks, students!)
-** tests for makefile dependencies: reliable parallel build
-** new generational mark and sweep garbage collector
-** imcc encapsulation
-** immutable strings
-** more efficient bytecode storage
-** still too slow
-+*** profilers and optimizers wanted!
+* moved to Git and GitHub from svn
+* big test coverage increase from Google Code-In (thanks, students!)
+* tests for makefile dependencies: reliable parallel build
+* new generational mark and sweep garbage collector
+* imcc encapsulation
+* immutable strings
+* more efficient bytecode storage
+* still too slow
+*** profilers and optimizers wanted!
 
 ----
 == How's Parrot doing?
