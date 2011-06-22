@@ -6,18 +6,24 @@ presentation_notes: slides at mksig.org/slides/osb11
 {image: http://farm3.static.flickr.com/2342/2516515847_5a2566f26f_m_d.jpg}
 +* Who's used another language? (Perl, Python, Ruby, Scala, Haskell)
 {image: http://farm4.static.flickr.com/3177/3070754858_861f1200f1_z_d.jpg}
-+* What if they could work together?
-* {image: http://farm4.static.flickr.com/3430/4556206100_a922d9e5af_d.jpg}
++* What if they could work together to make something wonderful?
++* {image: http://farm4.static.flickr.com/3430/4556206100_a922d9e5af_d.jpg}
 
 ----
-* That's the dream.
-* a bit different from how Parrot started
+* Dynamic language interoperability is the dream.
++* my dream
++* a dream
++* Fructose (github.com/charliesome/Fructose) does this for Ruby to PHP
+* we want to make it possible for everyone
+{image: http://farm6.static.flickr.com/5285/5372478987_50e34fddfd_d.jpg}
++* All this is bit different from how Parrot started.
 
 ----
 == Where did Parrot come from?
 * Rakudo Perl 6
-* distinct VM
+* needed a distinct VM
 * now we want to take over the world
+{image: http://farm1.static.flickr.com/26/90110137_22c7cf1286_d.jpg}
 
 ----
 == What kind of a virtual machine is Parrot?
@@ -39,15 +45,10 @@ presentation_notes: slides at mksig.org/slides/osb11
 
 ----
 == Parrot's Goals
-* HLL interoperability
+* language interoperability
+* VM for dynamic languages
 * portability
 * but first, the characters
-----
-== imcc
-* fast, sometimes
-* works, mostly
-* originally a prototype that escaped
-{image: http://farm3.static.flickr.com/2031/2252206486_efce1517d9_d.jpg}
 ----
 == PASM
 * Parrot assembly language
@@ -62,18 +63,30 @@ presentation_notes: slides at mksig.org/slides/osb11
 * heredocs?
 {image: http://mksig.org/img/kakapo-disguised.jpg}
 ----
-== Garbage Collector
+== imcc
+* "intermediate code compiler"
+* turns PIR into bytecode
+* fast, sometimes
+* works, mostly
+* originally a prototype that escaped
+{image: http://farm3.static.flickr.com/2031/2252206486_efce1517d9_d.jpg}
+----
+== Garbage Collection
 * good performance
+* fairly well encapsulated
+* recently upgraded to generational mark and sweek
 * all the best of the 1980s
 {image: http://mksig.org/img/80s.png}
 ----
 == PMC/Object system
 * PMC - PolyMorphic Container (or Parrot Magic Cookie)
+* abstract data type for all complex data structures
 * usable, has its quirks
-* can't support slightly unusual languages like JavaScript
+* object model can't support slightly unusual languages like JavaScript
 {image: http://mksig.org/img/cookie.jpg}
 ----
 == C/PIR boundary
+* not actually a feature
 * PIR calls C that calls PIR ...
 * expensive to cross
 * typically about 3 nested loops deep
@@ -81,33 +94,24 @@ presentation_notes: slides at mksig.org/slides/osb11
 {image: http://mksig.org/img/canadian_border.jpg}
 
 ----
-== Parrot Features
-* you give us the abstract syntax tree, we'll take care of:
-* bytecode format and handling
-* basic data structures
-* calling conventions
-* garbage collection
-* runloops
-* I/O
-* NCI (native call interface, i.e. calling C libraries from an HLL)
-* C embedding API
-
-----
 == Who is Parrot for?
 * anyone who wants to...
 ** make interoperable languages a reality
 ** write a new language
-** write a new GC
 ** learn about compiler design
-** join a knowledgable and friendly bunch of OSS hackers
+** write a new GC
+** join a knowledgeable and friendly bunch of OSS hackers
+{image: http://farm2.static.flickr.com/1320/1367693632_175dcadda0_d.jpg}
 
 ----
 == Parrot and Other VMs
-* Why Parrot instead of JVM or CLI?
+* Why use Parrot instead of JVM or CLI?
 ** built-in multi-method dispatch
 ** dynamic object model
 ** designed first for dynamic languages
 ** Parrot Compiler Toolkit (used by Rakudo)
+** not owned by Oracle!
+{image: http://farm1.static.flickr.com/174/385123832_33d0b8952f_d.jpg}
 
 ----
 == Implementation Features
@@ -116,7 +120,22 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** trade execution stack for a linked list
 * portability - Linux, msvc, cygwin, darwin, solaris, dragonfly
 * flexible calling conventions (optional, named, positional, slurpy, etc)
-    
+* use our complete workflow, or roll your own
+{image: http://farm5.static.flickr.com/4053/4482579218_d9ceb9d40f_d.jpg}
+
+----
+== Let Parrot do the work.
+* you give us the abstract syntax tree, we'll take care of:
+* bytecode format and handling
+* basic data structures
+* calling conventions
+* garbage collection
+* runloops
+* I/O
+* NCI (native call interface, i.e. calling C libraries from a langauge)
+* C embedding API
+{image: http://farm5.static.flickr.com/4114/4809508484_83bddd10b0_d.jpg}
+
 ----
 == How's Parrot doing?
 * moved to Git and GitHub from svn
@@ -127,14 +146,30 @@ presentation_notes: slides at mksig.org/slides/osb11
 * immutable strings
 * more efficient bytecode storage
 * still too slow
-*** profilers and optimizers wanted!
 
 ----
 == Languages as Distinct Projects
-* Rakudo on its own
-* we still work together as needed
-* they need HLL testing
-    
+* Rakudo living on its own
+* still work together as needed
+* Rakudo needs regular testing
+* winxed
+
+----
+== Winxed
+* superficially javascript-like syntax
+* designed to compile naturally to PIR
+* self-hosting with a C++ bootstraping build
+* recently added to parrot.git
+  # return an 'OS' PMC
+  function getOS() {
+      var os;
+      try { loadlib('os');
+          os = new ['OS'];
+      }
+      catch() { }
+      for (;;) yield os;
+  }
+
 ----
 == Supporting Users
 * fine-tuning our deprecation/support policy
@@ -154,15 +189,16 @@ presentation_notes: slides at mksig.org/slides/osb11
 * imcc is no longer a special citizen
 * tree-optimization - optimize trees with patterns and transforms
 ** available to anyone producing a tree-like structure from PMCs
+{image: http://futuresteve.files.wordpress.com/2007/10/recycle.gif}
     
 ----
 == LLVM jitting of ops
 * bacek was working on an ops -> llvm compiler
-* C is nice for some things and seems like a small language at first
-* If you want to semantically parse C, not so much
+* C is nice for some things
+* semantically parsing? not so much
 * some problematic constructs: macros, structs, types
-* showing some good results for simple programs
-* ops reform needed for further work
+* good results for simple programs
+* needs ops reform
 
 ----
 == Growing Ecosystem
@@ -174,7 +210,6 @@ presentation_notes: slides at mksig.org/slides/osb11
 * PIRATE - self-hosted PIR compiler
 * others
 * with an ecosystem comes testing to find out what Parrot changes break which project
-* dukeleto is on it with Jitterbug
 
 ----
 == Needs Work
@@ -183,7 +218,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * lexical variable implementation
 * inner runloop problem
 * PIR/C boundary
-** sound interesting?
+* sound interesting?
 ** drop by #parrot and we'll put you to work
 
 ----
@@ -251,13 +286,11 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** Larry Wall says "There is more than one way to do it."
 ** We want people to use Parrot, even if they don't care for nqp and grammars
 +** self-hosted interoperable languages:
-** we'll provide a stable interface for creating bytecode and a flexible meta-object model
+** we provide a bytecode format and a flexible meta-object protocol
 ** they can use their preferred language
-** Winxed does this now, JavaScript and Python3 GSoC projects will do this too
-
+** Winxed does this now, JavaScript and Python will
 ----
-== Who's in Parrot's future?
-* You are!
+== Want to learn more?
 ** chat: #parrot on irc.parrot.org
 ** fork: github.com/parrot/parrot
 ** report: trac.parrot.org

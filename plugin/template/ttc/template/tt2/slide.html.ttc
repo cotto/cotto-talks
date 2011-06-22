@@ -6,7 +6,7 @@ use utf8;
 
 Template::Document->new({
     METADATA => {
-        'modtime' => '1300247077',
+        'modtime' => '1308760136',
         'name' => 'slide.html',
     },
     BLOCK => sub {
@@ -25,13 +25,8 @@ Template::Document->new({
     $output .=  "\n";
 #line 6 "template/tt2/slide.html"
     $output .=  $stash->get('slide_content');
-#line 9 "template/tt2/slide.html"
-    if (!($stash->get('last'))) {
-    $output .=  "<small>continued...</small>\n";
-    }
-    
-    $output .=  "\n</div>\n";
-#line 11 "template/tt2/slide.html"
+    $output .=  "</div>\n";
+#line 8 "template/tt2/slide.html"
     $output .=  $context->include('bottom.html');
     $output .=  "\n<!-- END slide -->\n";
         } };
