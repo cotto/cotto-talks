@@ -157,7 +157,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * still work together as needed
 * Rakudo needs regular testing
 * winxed
-{image: http://farm1.static.flickr.com/145/347859123_a466419dbd_d.jpg}
+{image: http://farm4.static.flickr.com/3469/3972464067_d73d38bcb7_d.jpg}
 
 ----
 == Winxed
@@ -196,7 +196,15 @@ presentation_notes: slides at mksig.org/slides/osb11
 * tree-optimization - optimize trees with patterns and transforms
 ** available to anyone producing a tree-like structure from PMCs
 {image: http://futuresteve.files.wordpress.com/2007/10/recycle.gif}
-    
+----
+{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1707-chess.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1708-murkle.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1709-kasha.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1710-Sammy.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1711-raleigh.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1712-mumin.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1713-chin-haiku.jpg}
++{image: http://www.infinitecat.com/infinite/bigpics/1701-1800/1714-annandale.jpg}
 ----
 == LLVM jitting of ops
 * bacek was working on an ops -> llvm compiler
