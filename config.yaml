@@ -22,7 +22,7 @@ auto_scrolldown: 1
 logo_image: logo.png
 file_base: /usr/src/presentations/yapcna2011-parrotstate
 
-slides_file: ParrotState2011LinuxFestNW.slides
+slides_file: ParrotState2011OSBridge.slides
 template_directory: template/tt2
 template_path: 
 - ./template/tt2

@@ -21,21 +21,21 @@ presentation_notes: slides at mksig.org/slides/osb11
 
 ----
 == What kind of a virtual machine is Parrot?
-** "virtual machine" means "implements a computer in software"
-** not hardware virtualization like VMWare, EC2, etc
-** emulate a computer that doesn't exist in hardware
-** better living through abstraction!
+* "virtual machine" means "implements a computer in software"
+* not hardware virtualization like VMWare, EC2, etc
+* emulate a computer that doesn't exist in hardware
+* better living through abstraction!
 
 ----
 == What is Parrot?
-** virtual machine, tools and runtime for dynamic language implementations
-** interoperable dynamic languages 
-** libparrot
-** PIR compiler
-** nqp (not quite Perl 6) for building languages
-** complete implementations exist of Rakudo, Partcl and Lua
-** JavaScript and Python3 (GSoC)
-** many other languages at various stages
+* virtual machine, tools and runtime for dynamic language implementations
+* interoperable dynamic languages 
+* libparrot
+* PIR compiler
+* nqp (not quite Perl 6) for building languages
+* complete implementations exist of Rakudo, Partcl and Lua
+* JavaScript and Python3 (GSoC)
+* many other languages at various stages
 
 ----
 == Parrot's Goals
@@ -82,15 +82,15 @@ presentation_notes: slides at mksig.org/slides/osb11
 
 ----
 == Parrot Features
-** you give us the abstract syntax tree, we'll take care of:
-** bytecode format and handling
-** basic data structures
-** calling conventions
-** garbage collection
-** runloops
-** I/O
-** NCI (native call interface, i.e. calling C libraries from an HLL)
-** C embedding API
+* you give us the abstract syntax tree, we'll take care of:
+* bytecode format and handling
+* basic data structures
+* calling conventions
+* garbage collection
+* runloops
+* I/O
+* NCI (native call interface, i.e. calling C libraries from an HLL)
+* C embedding API
 
 ----
 == Who is Parrot for?
@@ -102,8 +102,8 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** join a knowledgable and friendly bunch of OSS hackers
 
 ----
-++ Parrot and Other VMs
-* What makes Parrot well-suited for dynamic languages compared to traditional VMs (CLI, JVM)?
+== Parrot and Other VMs
+* Why Parrot instead of JVM or CLI?
 ** built-in multi-method dispatch
 ** dynamic object model
 ** designed first for dynamic languages
@@ -113,7 +113,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 == Implementation Features
 * register-based
 * continuation-passing style control flow
-** we trade an execution stack for a linked list
+** trade execution stack for a linked list
 * portability - Linux, msvc, cygwin, darwin, solaris, dragonfly
 * flexible calling conventions (optional, named, positional, slurpy, etc)
     
@@ -130,26 +130,21 @@ presentation_notes: slides at mksig.org/slides/osb11
 *** profilers and optimizers wanted!
 
 ----
-== How's Parrot doing?
-* Languages as Distinct Projects
-** Rakudo is living on its own
-** there's some overlap in developers between Parrot and Rakudo, but it's largely orthogonal
-** we still work together as needed
-** Rakudo is a primary driver of our HLL testing infrastructure
-** separation means regular automated testing so we know when a language breaks
+== Languages as Distinct Projects
+* Rakudo on its own
+* we still work together as needed
+* they need HLL testing
     
 ----
-== How's Parrot doing?
-* Supporting Users
-** fine-tuning our deprecation/support policy
-*** we need to make progress, but we can't break things just because
-** deprecations in a machine-readable format - api.yaml
-** tool to scan code and warning about deprecated functions
+== Supporting Users
+* fine-tuning our deprecation/support policy
+** need to change APIs occasionally, but can't break things just because
+* deprecations in a machine-readable format - api.yaml
+* tool to warn users about deprecations
 
 ----
-== How's Parrot doing?
-* Self-hosted Infrastructure
-** self-hosted ops compiler -  written in nqp
+== Self-hosted Infrastructure
+* self-hosted ops compiler
 ** ops files are defined in Parrot-flavored C
 ** ops2c compiles them into core_ops.c
 ** core_ops.c is checked into git to break the cycle
@@ -161,46 +156,42 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** available to anyone producing a tree-like structure from PMCs
     
 ----
-== How's Parrot doing?
-* LLVM jitting of ops
-** bacek was working on an ops -> llvm compiler
-** C is nice for some things and seems like a small language at first
-** If you want to semantically parse C, not so much
-** some problematic constructs: macros, structs, types
-** showing some good results for simple programs
-** ops reform needed for further work
+== LLVM jitting of ops
+* bacek was working on an ops -> llvm compiler
+* C is nice for some things and seems like a small language at first
+* If you want to semantically parse C, not so much
+* some problematic constructs: macros, structs, types
+* showing some good results for simple programs
+* ops reform needed for further work
 
 ----
-== How's Parrot doing?
-* Growing Ecosystem
-** parrot-linear-algebra - linear algebra library
-** winxed - JS-like syntax, maps cleanly to PIR
-** Rosella - library of libraries 
-** distutils - install and build tools
-** blizkost - Perl 5 embedded in Parrot
-** PIRATE - self-hosted PIR compiler
-** others
+== Growing Ecosystem
+* parrot-linear-algebra - linear algebra library
+* winxed - JS-like syntax, maps cleanly to PIR
+* Rosella - library of libraries 
+* distutils - install and build tools
+* blizkost - Perl 5 embedded in Parrot
+* PIRATE - self-hosted PIR compiler
+* others
 * with an ecosystem comes testing to find out what Parrot changes break which project
 * dukeleto is on it with Jitterbug
 
 ----
-== How's Parrot doing?
-* Continuing Challenges
-** *more* regular automated HLL/library testing
-** pcc speed/efficiency
-** lexical variable implementation
-** inner runloop problem
-** PIR/C boundary
-*** sound interesting?
-*** drop by #parrot and we'll put you to work
+== Needs Work
+* *more* regular automated HLL/library testing
+* pcc speed/efficiency
+* lexical variable implementation
+* inner runloop problem
+* PIR/C boundary
+** sound interesting?
+** drop by #parrot and we'll put you to work
 
 ----
 == What's in Parrot's future?
 * Google Summer of Code
 ** fourth year participating in Google Summer of Code
 ** first year as our own organization
-** 7 accepted projects!
-*** GObject Interop - Christoph Gaertner (Andrew Whitworth)
+** 6 accepted and active projects!
 *** GMP Integer Bindings - Robert Kuo (Jonathan Leto)
 *** JavaScript on Parrot - Rohit Jangid (Will Coleda)
 *** Python3 on Parrot - Lucian Branescu Mihaila (Allison Randal)
@@ -210,35 +201,32 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** follow them on their parrot.org blogs
 
 ----
-== What's in Parrot's future?
-* More Self-hosted Tools
-** PIRATE - self-hosted PIR compiler, written in nqp
-*** uses tree-optimization for code optimization
-*** really shiny
-*** also, slow
+== More Self-hosted Tools
+* PIRATE - self-hosted PIR compiler, written in nqp
+** uses tree-optimization for code optimization
+** really shiny
+** also, slow
 
 ----
-== What's in Parrot's future?
-* M0
-** aggressively minimal VM, new foundation for Parrot
-** about as powerful as C, but we can easily analyze it
-** removes the need for the C/PIR boundary
-** readily supports multiple implementations
-** simple to jit, currently 36 ops
+= M0
+* aggressively minimal VM, new foundation for Parrot
+* as powerful as C
+* can readily analyze
+* no C/PIR boundary
+* readily supports multiple implementations
+* simple to jit, currently 37 ops
 
 ----
-== What's in Parrot's future?
-* Lorito
-** combination of M0 and a meta-object model
-** will replace the majority of Parrot's C components
-** sufficient to implement PMCs, pcc, strings, etc
-* meta-object model is called 6model
+== Lorito
+* M0 + meta-object model
+* replace majority of Parrot's C components
+* sufficient to implement PMCs, pcc, strings, etc
 ** programmatic interface for class manipulation
 ** objects that create classes that create objects
-** implemented by jnthn in nqp
+* implemented by jnthn in nqp and Rakudo as "6model"
 
 ----
-== What's in Parrot's future?
+== 6model
 * Example of 6model code (from 6guts.wordpress.com)
  #class definition
  class Band {
@@ -270,12 +258,11 @@ presentation_notes: slides at mksig.org/slides/osb11
 ----
 == Who's in Parrot's future?
 * You are!
-** -Ofun!
-** drop by #parrot on irc.parrot.org
-** fork us on github.com/parrot/parrot
-** file a bug at trac.parrot.org
-** follow discussions at parrot-dev@parrot.org
-** follow blogs at planet.parrotcode.org (including GSoC progress)
+** chat: #parrot on irc.parrot.org
+** fork: github.com/parrot/parrot
+** report: trac.parrot.org
+** email: parrot-dev@parrot.org
+** read: planet.parrotcode.org
     
 ----
 == That's it!

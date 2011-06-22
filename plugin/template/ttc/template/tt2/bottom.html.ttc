@@ -6,7 +6,7 @@ use utf8;
 
 Template::Document->new({
     METADATA => {
-        'modtime' => '1302981414',
+        'modtime' => '1308755138',
         'name' => 'bottom.html',
     },
     BLOCK => sub {
@@ -37,10 +37,7 @@ Template::Document->new({
     $output .=  "\">";
 #line 9 "template/tt2/bottom.html"
     $output .=  $stash->get('link_next');
-    $output .=  "</a>\n    </div>\n</td>\n<td align=\"right\" valign=\"middle\">\n    ";
-#line 13 "template/tt2/bottom.html"
-    $output .=  $stash->get('copyright_string');
-    $output .=  "\n</td>\n</tr>\n</table>\n</div> \n<div id=\"logo\"></div>\n<div class=\"spacer\">\n<a name=\"end\"></a>\n</div>\n</body>\n</html>\n\n";
+    $output .=  "</a>\n    </div>\n</td>\n<td align=\"right\" valign=\"middle\">\n</td>\n</tr>\n</table>\n</div> \n<div id=\"logo\"></div>\n<div class=\"spacer\">\n<a name=\"end\"></a>\n</div>\n</body>\n</html>\n\n";
         } };
         if ($@) {
             $_tt_error = $context->catch($@, \$output);
