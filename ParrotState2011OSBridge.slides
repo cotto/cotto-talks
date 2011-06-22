@@ -2,7 +2,7 @@
 presentation_title: Parrot: State of the VM
 presentation_notes: slides at mksig.org/slides/osb11
 ----
-* Who here has used PHP?
+* Who's used PHP?
 {image: http://farm3.static.flickr.com/2342/2516515847_5a2566f26f_m_d.jpg}
 +* Who's used another language? (Perl, Python, Ruby, Scala, Haskell)
 {image: http://farm4.static.flickr.com/3177/3070754858_861f1200f1_z_d.jpg}
@@ -11,11 +11,11 @@ presentation_notes: slides at mksig.org/slides/osb11
 
 ----
 * Dynamic language interoperability is the dream.
+{image: http://farm6.static.flickr.com/5285/5372478987_50e34fddfd_d.jpg}
 +* my dream
 +* a dream
 +* Fructose (github.com/charliesome/Fructose) does this for Ruby to PHP
 * we want to make it possible for everyone
-{image: http://farm6.static.flickr.com/5285/5372478987_50e34fddfd_d.jpg}
 +* All this is bit different from how Parrot started.
 
 ----
@@ -31,6 +31,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * not hardware virtualization like VMWare, EC2, etc
 * emulate a computer that doesn't exist in hardware
 * better living through abstraction!
+{image: http://farm6.static.flickr.com/5102/5759533383_3ea9f42697_d.jpg}
 
 ----
 == What is Parrot?
@@ -42,6 +43,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * complete implementations exist of Rakudo, Partcl and Lua
 * JavaScript and Python3 (GSoC)
 * many other languages at various stages
+{image: http://farm4.static.flickr.com/3535/3226067253_2b3b4bc5f5_d.jpg}
 
 ----
 == Parrot's Goals
@@ -49,6 +51,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * VM for dynamic languages
 * portability
 * but first, the characters
+{image: http://farm1.static.flickr.com/232/459744842_59f1462f8d_d.jpg}
 ----
 == PASM
 * Parrot assembly language
@@ -74,7 +77,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 == Garbage Collection
 * good performance
 * fairly well encapsulated
-* recently upgraded to generational mark and sweek
+* recently upgraded to generational mark and sweep
 * all the best of the 1980s
 {image: http://mksig.org/img/80s.png}
 ----
@@ -146,6 +149,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * immutable strings
 * more efficient bytecode storage
 * still too slow
+{image: http://farm3.static.flickr.com/2198/2273894619_86c982de18_d.jpg}
 
 ----
 == Languages as Distinct Projects
@@ -153,6 +157,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * still work together as needed
 * Rakudo needs regular testing
 * winxed
+{image: http://farm1.static.flickr.com/145/347859123_a466419dbd_d.jpg}
 
 ----
 == Winxed
@@ -176,6 +181,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** need to change APIs occasionally, but can't break things just because
 * deprecations in a machine-readable format - api.yaml
 * tool to warn users about deprecations
+{image: http://farm3.static.flickr.com/2433/3561178922_18c46ceb69_d.jpg}
 
 ----
 == Self-hosted Infrastructure
@@ -199,6 +205,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * some problematic constructs: macros, structs, types
 * good results for simple programs
 * needs ops reform
+{image: http://farm1.static.flickr.com/33/64323044_ee665a3699_d.jpg}
 
 ----
 == Growing Ecosystem
@@ -210,6 +217,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * PIRATE - self-hosted PIR compiler
 * others
 * with an ecosystem comes testing to find out what Parrot changes break which project
+{image: http://farm1.static.flickr.com/138/334441304_dc07f14e79_d.jpg}
 
 ----
 == Needs Work
@@ -220,6 +228,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * PIR/C boundary
 * sound interesting?
 ** drop by #parrot and we'll put you to work
+{image: http://farm6.static.flickr.com/5269/5641801126_6effb1cba5_d.jpg}
 
 ----
 == What's in Parrot's future?
@@ -234,6 +243,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 *** New Debugger - Kevin Polulak (Christoph Otto)
 *** newPOST Migration - Brian Gernhardt (Vasily Chekalkin)
 ** follow them on their parrot.org blogs
+{image: http://farm1.static.flickr.com/16/90607850_ee3fbb18e0_d.jpg}
 
 ----
 == More Self-hosted Tools
@@ -241,6 +251,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** uses tree-optimization for code optimization
 ** really shiny
 ** also, slow
+{image: http://farm2.static.flickr.com/1023/563415640_6ffd1f965d_d.jpg}
 
 ----
 = M0
@@ -250,6 +261,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * no C/PIR boundary
 * readily supports multiple implementations
 * simple to jit, currently 37 ops
+{image: http://farm3.static.flickr.com/2745/4144909846_a3c21cf980_d.jpg}
 
 ----
 == Lorito
@@ -259,6 +271,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 ** programmatic interface for class manipulation
 ** objects that create classes that create objects
 * implemented by jnthn in nqp and Rakudo as "6model"
+{image: http://farm1.static.flickr.com/32/186394342_9bc9c0dcd8_d.jpg}
 
 ----
 == 6model
@@ -281,22 +294,24 @@ presentation_notes: slides at mksig.org/slides/osb11
 
 ----
 == What's in Parrot's future?
+{image: http://farm2.static.flickr.com/1072/1472733792_9e8b210b64_d.jpg} 
 * TIMTOWTDI!
-** PCT is built around Rakudo-y assumptions, since Rakudo hackers built them
+** PCT is built from Rakudo-y assumptions, since Rakudo hackers built it
 ** Larry Wall says "There is more than one way to do it."
-** We want people to use Parrot, even if they don't care for nqp and grammars
-+** self-hosted interoperable languages:
+** We want people to target Parrot, even if they don't care for nqp and grammars
+----
+== self-hosted interoperable languages:
 ** we provide a bytecode format and a flexible meta-object protocol
 ** they can use their preferred language
 ** Winxed does this now, JavaScript and Python will
+{image: http://farm6.static.flickr.com/5011/5507833019_db2926c4b5_d.jpg}
 ----
 == Want to learn more?
 ** chat: #parrot on irc.parrot.org
 ** fork: github.com/parrot/parrot
 ** report: trac.parrot.org
 ** email: parrot-dev@parrot.org
-** read: planet.parrotcode.org
-    
-----
-== That's it!
- * questions?
+** blogs: planet.parrotcode.org
+** site: parrot.org
+* questions?
+{image: http://farm1.static.flickr.com/125/405060124_62274e4c67_d.jpg}
