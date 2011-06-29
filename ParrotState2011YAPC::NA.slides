@@ -1,33 +1,31 @@
 ----
 presentation_title: Parrot: State of the VM
-presentation_notes: slides at mksig.org/slides/osb11
+presentation_notes: slides at mksig.org/slides/yapcna11
 ----
-* Who's used Perl 6?
+* Who's used Perl 5, Perl 6?
+{image: http://farm3.static.flickr.com/2410/2685530849_d629c64f32_d.jpg}
++* Who's been stuck using PHP?
 {image: http://farm3.static.flickr.com/2342/2516515847_5a2566f26f_m_d.jpg}
-+* Who uses Perl 5 at $dayjob?
-{image: http://farm4.static.flickr.com/3177/3070754858_861f1200f1_z_d.jpg}
-+* Perl 6 is already influencing new features in Perl 5.  
-* What if they could work together to make something wonderful?
++* What if they could work together to make something wonderful?
 +* {image: http://farm4.static.flickr.com/3430/4556206100_a922d9e5af_d.jpg}
 
 ----
 * Dynamic language interoperability is the dream.
 {image: http://farm6.static.flickr.com/5285/5372478987_50e34fddfd_d.jpg}
 +* my dream
-+* a dream
 +* Fructose (github.com/charliesome/Fructose) does this for Ruby to PHP
 * we want to make it possible for everyone
 +* All this is bit different from how Parrot started.
 
 ----
-== Where did Parrot come from?
+== Parrot's origin
 * Rakudo Perl 6
 * needed a distinct VM
 * now we want to take over the world
 {image: http://farm1.static.flickr.com/26/90110137_22c7cf1286_d.jpg}
 
 ----
-== What kind of a virtual machine is Parrot?
+== virtual machines?
 * "virtual machine" means "implements a computer in software"
 * not hardware virtualization like VMWare, EC2, etc
 * emulate a computer that doesn't exist in hardware
@@ -74,8 +72,8 @@ presentation_notes: slides at mksig.org/slides/osb11
 * insruction set for PIR
 * currently ~1100 ops
 * implemented in mangled-C .ops files
-* core and dynops
-{image: IMAGE HERE}
+* core ops and dynops
+{image: http://farm3.static.flickr.com/2441/3638445921_4f92602795_d.jpg}
 ----
 == imcc
 * "intermediate code compiler"
@@ -98,7 +96,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 * abstract data type for all complex data structures
 * usable, has its quirks
 * object model can't support slightly unusual object systems like JavaScript's
-* core and dynpmcs
+* core PMCs and dynpmcs
 {image: http://mksig.org/img/cookie.jpg}
 ----
 == C/PIR boundary
@@ -111,10 +109,10 @@ presentation_notes: slides at mksig.org/slides/osb11
 {image: http://mksig.org/img/canadian_border.jpg}
 
 ----
-== Who is Parrot for?
+== Parrot's users
 * anyone who wants to...
 ** make interoperable languages a reality
-** hack on Rakudo
+** hack on Rakudo's foundation
 ** write a new language
 ** learn about compiler design
 ** write a new GC
@@ -154,7 +152,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 {image: http://farm5.static.flickr.com/4114/4809508484_83bddd10b0_d.jpg}
 
 ----
-== How's Parrot doing?
+== How Parrot is doing
 * moved to Git and GitHub from svn
 * big test coverage increase from Google Code-In (thanks, students!)
 * tests for makefile dependencies: reliable parallel build
@@ -245,7 +243,7 @@ presentation_notes: slides at mksig.org/slides/osb11
 {image: http://farm6.static.flickr.com/5269/5641801126_6effb1cba5_d.jpg}
 
 ----
-== What's in Parrot's future?
+== Parrot's future
 * Google Summer of Code
 ** fourth year participating in Google Summer of Code
 ** first year as our own organization
@@ -271,10 +269,11 @@ presentation_notes: slides at mksig.org/slides/osb11
 = M0
 * aggressively minimal VM, new foundation for Parrot
 * as powerful as C
-* can readily analyze
+* can readily be analyzed
 * no C/PIR boundary
 * readily supports multiple implementations
 * simple to jit, currently 37 ops
+* based on chunks (consts, metadata, bytecode)
 {image: http://farm3.static.flickr.com/2745/4144909846_a3c21cf980_d.jpg}
 
 ----
@@ -307,7 +306,7 @@ presentation_notes: slides at mksig.org/slides/osb11
  Band.^compose();
 
 ----
-== What's in Parrot's future?
+== Parrot's future for language implementations
 {image: http://farm2.static.flickr.com/1072/1472733792_9e8b210b64_d.jpg} 
 * TIMTOWTDI!
 ** PCT is built from Rakudo-y assumptions, since Rakudo hackers built it
