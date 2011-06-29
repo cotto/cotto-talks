@@ -11,11 +11,11 @@ presentation_notes: slides at mksig.org/slides/yapcna11
 
 ----
 * Dynamic language interoperability is the dream.
-{image: http://farm6.static.flickr.com/5285/5372478987_50e34fddfd_d.jpg}
-+* my dream
-+* Fructose (github.com/charliesome/Fructose) does this for Ruby to PHP
+* my dream
+* Fructose (github.com/charliesome/Fructose) does this for Ruby to PHP
 * we want to make it possible for everyone
-+* All this is bit different from how Parrot started.
+* All this is bit different from how Parrot started.
+{image: http://farm6.static.flickr.com/5285/5372478987_50e34fddfd_d.jpg}
 
 ----
 == Parrot's origin
